@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Evenement Details - Anderlechtse NGO</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+<!-- Navigation -->
+<nav class="bg-blue-600 text-white p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <a href="/" class="text-xl font-bold">Anderlechtse NGO</a>
+    <div>
+      <a href="/new" class="mr-4 hover:underline">Nieuw Evenement</a>
+      <a href="/about" class="hover:underline">Over Ons</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Main Content -->
+<main class="container mx-auto p-4">
+  <h1 class="text-3xl font-bold mb-6">Evenement Details</h1>
+
+  <div class="bg-white rounded-lg shadow-md p-6">
+    <div th:if="${evenement}">
+      <h2 class="text-2xl font-bold mb-4" th:text="${evenement.titel}"></h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div>
+          <p class="text-gray-600 font-semibold">Organisatie:</p>
+          <p th:text="${evenement.organisatie}"></p>
+        </div>
+
+        <div>
+          <p class="text-gray-600 font-semibold">Tijdstip:</p>
+          <p th:text="${#temporals.format(evenement.tijdstip, 'dd-MM-yyyy HH:mm')}"></p>
+        </div>
+
+        <div>
+          <p class="text-gray-600 font-semibold">Contactpersoon:</p>
+          <p th:text="${evenement.mailContactpersoon}"></p>
+        </div>
+
+        <div>
+          <p class="text-gray-600 font-semibold">Locatie:</p>
+          <p th:text="${evenement.locatie.naam}"></p>
+          <p class="text-sm text-gray-500" th:text="${evenement.locatie.adres}"></p>
+          <p class="text-sm text-gray-500">Capaciteit: <span th:text="${evenement.locatie.capaciteit}"></span> personen</p>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <p class="text-gray-600 font-semibold mb-2">Omschrijving:</p>
+        <p th:text="${evenement.omschrijving}"></p>
+      </div>
+    </div>
+
+    <div th:unless="${evenement}">
+      <p class="text-red-600">Evenement niet gevonden.</p>
+    </div>
+
+    <div class="mt-6">
+      <a href="/" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+        Terug naar Overzicht
+      </a>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white text-center p-4 mt-8">
+  <p>&copy; 2025 Anderlechtse NGO. Alle rechten voorbehouden.</p>
+</footer>
+</body>
+</html>
